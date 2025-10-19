@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S'inscrire - Programme de Fidélité</title>
+    <link rel="stylesheet" href="./css/signup.css">
+</head>
+<body class="light-theme">
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-left">
+            <a href="/" class="logo">
+                <span class="logo-placeholder">LOGO</span>
+            </a>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+        <div class="nav-links">
+            <a href="/login">Se connecter</a>
+            <a href="/signup" class="active">S'inscrire</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Section Formulaire -->
+        <div class="form-section">
+            <div class="form-wrapper">
+                <h1 class="form-title">S'inscrire</h1>
+                
+                <form id="signupForm" action="/signup" method="POST">
+                    <div class="form-group">
+                        <label class="field-label">
+                            Nom<span class="required-mark">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input type="text" name="nom" placeholder="Nom" onkeyup="onNothing()" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="field-label">
+                            Prénom<span class="required-mark">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input type="text" name="prenom" placeholder="Prénom" onkeyup="onNothing()" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="field-label">
+                            Numéro ou Email<span class="required-mark">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📧</span>
+                            <input type="text" name="contact" placeholder="Numéro ou Email" id="contactInput"  onkeyup="validateContact()" required>
+                        </div>
+                        <p style="color:rgb(180, 0, 0);" id="contactError"  class="hiddenContactError">numero à 10 chiffres ou email valide</p>
+                    </div>
+                   
+
+                    <div class="form-group">
+                        <label class="field-label">
+                            Mot de passe<span class="required-mark">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" name="password" id="passwordInput" placeholder="Mot de passe" onkeyup="validatePassword()" required>
+
+                        </div>
+                        <div style="color:rgb(180, 0, 0);" id="passwordMessage"></div>
+                    </div>
+
+                    <button type="submit" id="submitButton" class="submit-btn-disabled" disabled>S'INSCRIRE</button>
+                </form>
+
+                <div class="switch-form">
+                    Vous avez déjà un compte ?
+                    <a href="/login">Se connecter</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Branding -->
+        <div class="brand-section">
+            <div class="brand-content">
+                <div class="brand-welcome">Bienvenue dans notre</div>
+                
+                <div class="brand-logo">
+                    <span class="brand-logo-icon">🍕</span>
+                </div>
+                
+                <h2 class="brand-name">Programme<br>de Fidélité</h2>
+                
+                <p class="brand-tagline">
+                    Rejoignez notre programme et profitez d'avantages exclusifs à chaque commande
+                </p>
+            </div>
+            
+            <div class="brand-footer">
+                © 2025 Gastronomie Pizza
+            </div>
+        </div>
+    </div>
+    <script src="./js/ThemeHandler.js"></script>
+    <script src="./js/signup.js">
+   
+        // Toggle theme
+     
+        // Form submission - Le formulaire sera soumis vers /api/signup
+        // Vous pouvez modifier l'action dans la balise <form> selon votre configuration
+    </script>
+     
+</body>
+</html>

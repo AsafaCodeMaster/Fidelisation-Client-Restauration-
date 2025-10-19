@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se connecter - Programme de Fidélité</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body class="light-theme">
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-left">
+            <a href="/" class="logo">
+                <span class="logo-placeholder">LOGO</span>
+            </a>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+        <div class="nav-links">
+            <a href="/login" class="active">Se connecter</a>
+            <a href="/signup">S'inscrire</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Section Branding - À GAUCHE -->
+        <div class="brand-section">
+            <div class="brand-content">
+                <div class="brand-welcome">Bon retour parmi nous</div>
+                
+                <div class="brand-logo">
+                    <span class="brand-logo-icon">🎁</span>
+                </div>
+                
+                <h2 class="brand-name">Vos récompenses<br>vous attendent</h2>
+                
+                <p class="brand-tagline">
+                    Connectez-vous pour accéder à vos points de fidélité, découvrir vos récompenses disponibles et profiter de vos avantages exclusifs
+                </p>
+
+                <div class="brand-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Membres actifs</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500K+</div>
+                        <div class="stat-label">Points distribués</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="brand-footer">
+                © 2025 Gastronomie Pizza
+            </div>
+        </div>
+
+        <!-- Section Formulaire - À DROITE -->
+        <div class="form-section">
+            <div class="form-wrapper">
+                <h1 class="form-title">Se connecter</h1>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <span class="input-icon">📧</span>
+                            <input type="text" name="contact" id="contactInput" placeholder="Numéro ou Email" onkeyup="validateContact()" required>
+                        </div>
+                        <p style="color:rgb(180, 0, 0);" id="contactError"  class="hiddenContactError">numero à 10 chiffres ou email valide</p>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" id="passwordInput" name="password" placeholder="Mot de passe" onkeyup="notOnContact()" required>
+                        </div>
+                        <p class="passwordError" id="showPasswordError"></p>
+                    </div>
+
+                    <div class="form-footer">
+                        <a href="/forgot-password" class="forgot-password">Mot de passe oublié ?</a>
+                    </div>
+
+                    <button type="submit" id="submitButton" class="submit-btn-disabled" disabled>SE CONNECTER</button>
+                </form>
+
+                <div class="switch-form">
+                    Vous n'avez pas de compte ?
+                    <a href="/signup">S'inscrire</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/ThemeHandler.js"></script>
+    <script src="./js/login.js"></script>
+
+</body>
+</html>
