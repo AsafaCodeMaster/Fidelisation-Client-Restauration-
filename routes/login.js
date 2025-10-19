@@ -3,9 +3,10 @@ const path = require('path');
 const router = express.Router();
 // Importe les fonctions de logique métier
 const loginController = require('../controllers/login');
+const preventUnprotectedAccess = require('../middleware/preventUnprotectedAccess');
 
 // Route page de connexion
-router.get('/', (req, res) => {
+router.get('/',preventUnprotectedAccess.preventAuthenticatedAccess, (req, res) => {
   res.sendFile(path.join(__dirname,'..' , 'public', 'login.html'));
 });
 

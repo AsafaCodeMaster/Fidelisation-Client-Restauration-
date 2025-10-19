@@ -3,10 +3,10 @@ const path = require('path');
 const router = express.Router();
 // Importe les fonctions de logique métier
 const signupController = require('../controllers/signup');
-
+const preventUnprotectedAccess = require('../middleware/preventUnprotectedAccess');
 
 // Route page d'inscription
-router.get('/', (req, res) => {
+router.get('/',preventUnprotectedAccess.preventAuthenticatedAccess, (req, res) => {
   res.sendFile(path.join(__dirname,'..' , 'public', 'signup.html'));
 });
 

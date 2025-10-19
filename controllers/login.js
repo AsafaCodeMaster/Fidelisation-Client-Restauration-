@@ -33,11 +33,19 @@ async function connectClient(req, res) {
     }
 
     // Create JWT token
-    console.log('invalid credential not reached or valid ');
+    console.log('valid credential reached token to be sent is :');
     const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
+    console.log(token);
 
     // Send token to client
-    res.json({ token });
+    res.cookie('token', token, {
+  httpOnly: true,          // cannot be accessed by JS
+  secure: false,           // true if you use HTTPS
+  sameSite: 'lax',         // controls cross-site cookie behavior
+  maxAge: 60 * 60 * 1000   // 1 hour in ms
+});
+
+res.json({ message: 'Login successful' });
   } catch (error) {
     console.error(error);
     res.status(500).send('Error accessing your account');

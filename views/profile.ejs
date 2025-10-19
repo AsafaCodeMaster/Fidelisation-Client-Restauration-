@@ -50,8 +50,11 @@
 
      
     </div>
-         <button onclick="localStorage.removeItem('token');window.location.href = '/login';">Log out</button>
-    <script src="../public/js/protected/logout.js"></script>
+    <form id="logoutForm" action="/logout" method="post">
+      <button type="submit" >Log out</button>
+    </form>
+         
+  
 
   </body>
 </html>

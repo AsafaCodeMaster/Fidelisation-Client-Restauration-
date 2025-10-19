@@ -2,7 +2,7 @@
                 const submitButton = document.getElementById('submitButton');
                 const contactError = document.getElementById('contactError');
                 const passwordInput = document.getElementById("passwordInput");
-                const showPasswordError = document.getElementById('showPassError');
+                const showPasswordError = document.getElementById('showPasswordError');
 
                 const emailRegex = /^[^\s@]+@[^\s@]+\.com$/; 
                 const phoneRegex = /^\d{10}$/; 
@@ -15,21 +15,17 @@
 
 
                 async function loginUser(contact, password) {
-  const response = await fetch('http://localhost:3000/login', {
+  const response = await fetch(`${window.location.origin}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ contact, password })
+    body: JSON.stringify({ contact, password }),
+  credentials: 'include'
   });
 
-
-  
   if (response.ok) {
     // Store token in localStorage
      alert('Login successful');
-     const data = await response.json();
-    localStorage.setItem('token', data.token);
-    
-    window.location.href = '/api';
+    window.location.href = '/profile';
   } else {
     const data = await response.text();
     alert('Login failed: ' + data);

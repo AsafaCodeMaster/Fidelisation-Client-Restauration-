@@ -4,22 +4,21 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 function verifyToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Extract token after 'Bearer'
+  const token = req.cookies.token;
 
   if (!token) {
-   // console.log("middleware profile.js says token is :" + token);
-    return res.status(401).json({ message: 'Access denied. No token provided.' });
+    console.log('middleware verifyToken.js: No token provided.' + req.cookies.token);
+    return res.redirect('/login');
   }
 
   try {
-    const verified = jwt.verify(token, process.env.SECRET_KEY);
-
-    // Attach decoded data (ex: userId) to request object
-    req.userId = verified.userId;
+    // Verify token validity
+    jwt.verify(token, process.env.SECRET_KEY);
     next();
   } catch (err) {
-    return res.status(403).json({ message: 'Invalid or expired token.' });
+    console.log('verifyToken: Invalid or expired token -> clearing cookie');
+    res.clearCookie('token');
+    return res.redirect('/login');
   }
 }
 
