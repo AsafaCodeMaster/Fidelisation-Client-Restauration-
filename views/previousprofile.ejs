@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mon Application</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/protected/home.css">
+</head>
+<body>
+    <!-- Sidebar -->
+     <%- include('partials/sidebar') %>
+     
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="content-header">
+            <h1>Bonn Retour parmis nous , <%= myclient.first_name %> <%= myclient.last_name %>!</h1>
+            <p>Here's what's happening with your account today.</p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Total Points</span>
+                    <div class="card-icon">
+                        <i class="bi bi-gem"></i>
+                    </div>
+                </div>
+                <div class="card-value">{{1,234}}</div>
+                <div class="card-description">Available for redemption</div>
+                <div class="card-trend">
+                    <i class="bi bi-arrow-up"></i>
+                    <span>{{+12%}} from last month</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Recent Purchases</span>
+                    <div class="card-icon">
+                        <i class="bi bi-cart-check"></i>
+                    </div>
+                </div>
+                <div class="card-value">{{24}}</div>
+                <div class="card-description">This month</div>
+                <div class="card-trend">
+                    <i class="bi bi-arrow-up"></i>
+                    <span>{{+8%}} from last month</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Total Spent</span>
+                    <div class="card-icon">
+                        <i class="bi bi-currency-dollar"></i>
+                    </div>
+                </div>
+                <div class="card-value">{{$3,456}}</div>
+                <div class="card-description">All time</div>
+                <div class="card-trend">
+                    <i class="bi bi-arrow-up"></i>
+                    <span>{{+15%}} from last month</span>
+                
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">Rewards Earned</span>
+                    <div class="card-icon">
+                        <i class="bi bi-trophy"></i>
+                    </div>
+                </div>
+                <div class="card-value">{{8}}</div>
+                <div class="card-description">Achievements unlocked</div>
+                <div class="card-trend">
+                    <i class="bi bi-arrow-up"></i>
+                    <span>{{+3}} this week</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Menu Button -->
+   
+
+    <script src="/js/protected/home.js">
+        
+    </script>
+</body>
+</html>

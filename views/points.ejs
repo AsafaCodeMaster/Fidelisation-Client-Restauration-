@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Points - FidélityApp</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/protected/home.css">
+    <link rel="stylesheet" href="/css/protected/points.css">
+</head>
+<body>
+    <!-- Include Sidebar Partial -->
+    <%- include('partials/sidebar') %>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="points-container">
+            <!-- Alert Messages -->
+            <div id="alertContainer"></div>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">
+                        <i class="bi bi-gem"></i>
+                        Mes Points
+                    </h1>
+                    <p class="page-subtitle">Gérez et consultez votre historique de points</p>
+                </div>
+            </div>
+
+            <!-- Points Summary Cards -->
+            <div class="summary-grid">
+                <div class="summary-card total-card">
+                    <div class="card-icon">
+                        <i class="bi bi-gem"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-label">Points Totaux</div>
+                        <div class="card-value" id="totalPoints">1,234</div>
+                        <div class="card-trend positive">
+                            <i class="bi bi-arrow-up"></i>
+                            <span>Disponibles maintenant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-card earned-card">
+                    <div class="card-icon">
+                        <i class="bi bi-plus-circle"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-label">Points Gagnés</div>
+                        <div class="card-value" id="earnedPoints">2,456</div>
+                        <div class="card-description">
+                            <i class="bi bi-calendar3"></i>
+                            Ce mois : +150 pts
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-card used-card">
+                    <div class="card-icon">
+                        <i class="bi bi-dash-circle"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-label">Points Utilisés</div>
+                        <div class="card-value" id="usedPoints">1,222</div>
+                        <div class="card-description">
+                            <i class="bi bi-calendar3"></i>
+                            Ce mois : -50 pts
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-card rate-card">
+                    <div class="card-icon">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-label">Taux d'Utilisation</div>
+                        <div class="card-value">49.8%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 49.8%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters and Actions -->
+            <div class="toolbar-section">
+                <div class="toolbar-card">
+                    <div class="toolbar-left">
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <i class="bi bi-funnel"></i>
+                                Type
+                            </label>
+                            <select class="filter-select" id="typeFilter">
+                                <option value="all">Tous</option>
+                                <option value="earned">Gagnés</option>
+                                <option value="used">Utilisés</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">
+                                <i class="bi bi-calendar-range"></i>
+                                Période
+                            </label>
+                            <select class="filter-select" id="periodFilter">
+                                <option value="all">Tout</option>
+                                <option value="today">Aujourd'hui</option>
+                                <option value="week">Cette semaine</option>
+                                <option value="month" selected>Ce mois</option>
+                                <option value="year">Cette année</option>
+                                <option value="custom">Personnalisé</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group" id="customDateRange" style="display: none;">
+                            <input type="date" class="filter-input" id="startDate">
+                            <span style="color: var(--text-gray);">à</span>
+                            <input type="date" class="filter-input" id="endDate">
+                        </div>
+
+                        <button class="btn-icon" id="resetFilters" title="Réinitialiser les filtres">
+                            <i class="bi bi-arrow-clockwise"></i>
+                        </button>
+                    </div>
+
+                    <div class="toolbar-right">
+                        <div class="search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="text" class="search-input" id="searchInput" 
+                                   placeholder="Rechercher par description...">
+                        </div>
+
+                        <button class="btn-primary" id="exportBtn">
+                            <i class="bi bi-download"></i>
+                            Exporter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Points Table -->
+            <div class="table-section">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3 class="table-title">
+                            <i class="bi bi-list-ul"></i>
+                            Historique des Points
+                        </h3>
+                        <div class="table-actions">
+                            <span class="result-count" id="resultCount">
+                                <strong>24</strong> transactions
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="points-table" id="pointsTable">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" data-sort="id">
+                                        <span>ID</span>
+                                        <i class="bi bi-chevron-expand"></i>
+                                    </th>
+                                    <th class="sortable" data-sort="type">
+                                        <span>Type</span>
+                                        <i class="bi bi-chevron-expand"></i>
+                                    </th>
+                                    <th class="sortable" data-sort="date">
+                                        <span>Date</span>
+                                        <i class="bi bi-chevron-expand"></i>
+                                    </th>
+                                    <th>Description</th>
+                                    <th class="sortable" data-sort="points">
+                                        <span>Points</span>
+                                        <i class="bi bi-chevron-expand"></i>
+                                    </th>
+                                    <th class="sortable" data-sort="balance">
+                                        <span>Solde Après</span>
+                                        <i class="bi bi-chevron-expand"></i>
+                                    </th>
+                                    <th>Statut</th>
+                                    <th class="text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <!-- Dynamic content will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="table-footer">
+                        <div class="pagination-info">
+                            Affichage de <strong id="showingFrom">1</strong> à <strong id="showingTo">10</strong> 
+                            sur <strong id="totalItems">24</strong> transactions
+                        </div>
+                        <div class="pagination" id="pagination">
+                            <!-- Pagination buttons will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <div class="empty-icon">
+                            <i class="bi bi-inbox"></i>
+                        </div>
+                        <h3>Aucune transaction trouvée</h3>
+                        <p>Il n'y a pas de transactions correspondant à vos critères.</p>
+                        <button class="btn-primary" onclick="document.getElementById('resetFilters').click()">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Réinitialiser les filtres
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Details Modal -->
+    <div id="detailsModal" class="modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <i class="bi bi-info-circle"></i>
+                    Détails de la Transaction
+                </h3>
+                <button class="modal-close" onclick="closeDetailsModal()">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Transaction details will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeDetailsModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/protected/home.js"></script>
+    <script src="/js/protected/points.js"></script>
+</body>
+</html>

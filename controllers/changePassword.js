@@ -1,6 +1,6 @@
 const db = require('../config/database');
 
-async function getClientProfile(req, res) {
+async function getClientChangePassword(req, res) {
   try {
     const clientId = req.userId;
 
@@ -16,7 +16,7 @@ async function getClientProfile(req, res) {
 
     const myclient = rows[0];
     // Render the EJS page with client info
-    res.render("home", { myclient });
+    res.render("changePassword", { myclient });
 
   } catch (error) {
     console.error(error);
@@ -24,4 +24,4 @@ async function getClientProfile(req, res) {
   }
 }
 
-module.exports = { getClientProfile };
+module.exports = { getClientChangePassword };

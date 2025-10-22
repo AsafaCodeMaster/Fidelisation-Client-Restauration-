@@ -1,0 +1,103 @@
+  <aside class="sidebar" id="sidebar">
+        <!-- Header -->
+        <div class="sidebar-header">
+            <div class="logo" id="logoToggle">
+                <div class="logo-icon">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                </div>
+                <span class="logo-text">FidelityApp</span>
+            </div>
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-menu">
+            <div class="nav-section">
+                <h3 class="nav-section-title">Menu Principal</h3>
+                <ul>
+                    <li class="nav-item">
+                        <a href="/home" class="nav-link active">
+                            <i class="bi bi-house-door-fill nav-icon"></i>
+                            <span class="nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/points" class="nav-link">
+                            <i class="bi bi-gem nav-icon"></i>
+                            <span class="nav-text">Points</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/orders" class="nav-link">
+                            <i class="bi bi-bag-check-fill nav-icon"></i>
+                            <span class="nav-text">Commander</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/purchase-history" class="nav-link">
+                            <i class="bi bi-clock-history nav-icon"></i>
+                            <span class="nav-text">Historique d'achats</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/rewards-history" class="nav-link">
+                            <i class="bi bi-trophy-fill nav-icon"></i>
+                            <span class="nav-text">Historique de récompenses</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/profile" class="nav-link">
+                            <i class="bi bi-person-circle nav-icon"></i>
+                            <span class="nav-text">Profil</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h3 class="nav-section-title">Support</h3>
+                <ul>
+                    <li class="nav-item">
+                        <a href="/feedback" class="nav-link">
+                            <i class="bi bi-chat-left-text-fill nav-icon"></i>
+                            <span class="nav-text">Feedback</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h3 class="nav-section-title">Paramètres</h3>
+                <ul>
+                    <li class="nav-item">
+                        <form action="/logout" method="POST" id="logoutForm" style="margin: 0;">
+                            <button type="submit" class="nav-link" id="logoutBtn" style="width: 100%; text-align: left; background: none; border: none; font-family: inherit; font-size: inherit;">
+                                <i class="bi bi-box-arrow-right nav-icon"></i>
+                                <span class="nav-text">Se déconnecter</span>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Theme Switch -->
+        <div class="theme-switch">
+            <div class="theme-toggle" id="themeToggle">
+            </div>
+            <span class="theme-label">Dark Mode</span>
+        </div>
+
+        <!-- User Profile -->
+        <div class="user-profile">
+            <div class="user-info">
+                <div class="user-avatar">{{JD}}</div>
+                <div class="user-details">
+                    <div class="user-name"><%= myclient.first_name %> <%= myclient.last_name %></div>
+                    <div class="user-email">{{john@example.com}}</div>
+                </div>
+            </div>
+        </div>
+    </aside>

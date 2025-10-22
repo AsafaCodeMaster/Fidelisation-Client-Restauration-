@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const profileMiddelware = require('../../middleware/preventProtectedAccess');
-const homeController = require('../../controllers/home');
+const pointsController = require('../../controllers/points');
 const decodeToken = require('../../middleware/decodeToken');
 
-router.get('/' ,profileMiddelware.verifyToken,decodeToken.extractUser,  homeController.getClientProfile);
+router.get('/' ,profileMiddelware.verifyToken,decodeToken.extractUser,  pointsController.getClientPoints);
 module.exports = router;

@@ -16,7 +16,7 @@ async function getClientProfile(req, res) {
 
     const myclient = rows[0];
     // Render the EJS page with client info
-    res.render("home", { myclient });
+    res.render("profile", { myclient });
 
   } catch (error) {
     console.error(error);

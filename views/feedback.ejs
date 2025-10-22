@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - FidélityApp</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/protected/home.css">
+    <link rel="stylesheet" href="/css/protected/feedback.css">
+</head>
+<body>
+    <!-- Include Sidebar Partial -->
+    <%- include('partials/sidebar') %>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="feedback-container">
+            <!-- Alert Messages -->
+            <div id="alertContainer"></div>
+
+            <!-- Feedback Card -->
+            <div class="feedback-card">
+                <!-- Logo/Icon -->
+                <div class="feedback-icon">
+                    <i class="bi bi-chat-left-text-fill"></i>
+                </div>
+
+                <!-- Title -->
+                <h1 class="feedback-title">VOTRE AVIS COMPTE</h1>
+
+                <!-- Subtitle -->
+                <p class="feedback-subtitle">
+                    Comment évalueriez-vous votre expérience avec FidélityApp ?
+                </p>
+
+                <!-- Overall Rating -->
+                <div class="overall-rating">
+                    <div class="star-group" id="overallRating">
+                        <i class="bi bi-star star-icon" data-value="1"></i>
+                        <i class="bi bi-star star-icon" data-value="2"></i>
+                        <i class="bi bi-star star-icon" data-value="3"></i>
+                        <i class="bi bi-star star-icon" data-value="4"></i>
+                        <i class="bi bi-star star-icon" data-value="5"></i>
+                    </div>
+                    <input type="hidden" id="overallRatingValue" value="0">
+                </div>
+
+                <!-- Feedback Form -->
+                <form id="feedbackForm">
+                    <!-- Rating Categories -->
+                    <div class="rating-section">
+                        <!-- Produits -->
+                        <div class="rating-item">
+                            <div class="rating-label">
+                                <i class="bi bi-box-seam"></i>
+                                <span>Qualité des produits</span>
+                            </div>
+                            <div class="star-group" data-category="produits">
+                                <i class="bi bi-star star-icon" data-value="1"></i>
+                                <i class="bi bi-star star-icon" data-value="2"></i>
+                                <i class="bi bi-star star-icon" data-value="3"></i>
+                                <i class="bi bi-star star-icon" data-value="4"></i>
+                                <i class="bi bi-star star-icon" data-value="5"></i>
+                            </div>
+                            <input type="hidden" name="produits" value="0">
+                        </div>
+
+                        <!-- Service d'accueil -->
+                        <div class="rating-item">
+                            <div class="rating-label">
+                                <i class="bi bi-person-hearts"></i>
+                                <span>Service d'accueil</span>
+                            </div>
+                            <div class="star-group" data-category="accueil">
+                                <i class="bi bi-star star-icon" data-value="1"></i>
+                                <i class="bi bi-star star-icon" data-value="2"></i>
+                                <i class="bi bi-star star-icon" data-value="3"></i>
+                                <i class="bi bi-star star-icon" data-value="4"></i>
+                                <i class="bi bi-star star-icon" data-value="5"></i>
+                            </div>
+                            <input type="hidden" name="accueil" value="0">
+                        </div>
+
+                        <!-- Service de livraison -->
+                        <div class="rating-item">
+                            <div class="rating-label">
+                                <i class="bi bi-truck"></i>
+                                <span>Service de livraison</span>
+                            </div>
+                            <div class="star-group" data-category="livraison">
+                                <i class="bi bi-star star-icon" data-value="1"></i>
+                                <i class="bi bi-star star-icon" data-value="2"></i>
+                                <i class="bi bi-star star-icon" data-value="3"></i>
+                                <i class="bi bi-star star-icon" data-value="4"></i>
+                                <i class="bi bi-star star-icon" data-value="5"></i>
+                            </div>
+                            <input type="hidden" name="livraison" value="0">
+                        </div>
+
+                        <!-- Rapport qualité-prix -->
+                        <div class="rating-item">
+                            <div class="rating-label">
+                                <i class="bi bi-currency-dollar"></i>
+                                <span>Rapport qualité-prix</span>
+                            </div>
+                            <div class="star-group" data-category="prix">
+                                <i class="bi bi-star star-icon" data-value="1"></i>
+                                <i class="bi bi-star star-icon" data-value="2"></i>
+                                <i class="bi bi-star star-icon" data-value="3"></i>
+                                <i class="bi bi-star star-icon" data-value="4"></i>
+                                <i class="bi bi-star star-icon" data-value="5"></i>
+                            </div>
+                            <input type="hidden" name="prix" value="0">
+                        </div>
+
+                        <!-- Programme de fidélité -->
+                        <div class="rating-item">
+                            <div class="rating-label">
+                                <i class="bi bi-gem"></i>
+                                <span>Programme de fidélité</span>
+                            </div>
+                            <div class="star-group" data-category="fidelite">
+                                <i class="bi bi-star star-icon" data-value="1"></i>
+                                <i class="bi bi-star star-icon" data-value="2"></i>
+                                <i class="bi bi-star star-icon" data-value="3"></i>
+                                <i class="bi bi-star star-icon" data-value="4"></i>
+                                <i class="bi bi-star star-icon" data-value="5"></i>
+                            </div>
+                            <input type="hidden" name="fidelite" value="0">
+                        </div>
+                    </div>
+
+                    <!-- Free Expression Section -->
+                    <div class="expression-section">
+                        <label for="libreExpression" class="expression-label">
+                            <i class="bi bi-pencil-square"></i>
+                            Libre expression (optionnel)
+                        </label>
+                        <textarea 
+                            id="libreExpression" 
+                            name="libreExpression" 
+                            class="expression-textarea"
+                            placeholder="Partagez-nous vos suggestions, commentaires ou remarques..."
+                            rows="5"
+                            maxlength="1000"></textarea>
+                        <div class="char-counter">
+                            <span id="charCount">0</span> / 1000 caractères
+                        </div>
+                    </div>
+
+                    <!-- Email Consent -->
+                    <div class="consent-section">
+                        <label class="consent-checkbox">
+                            <input type="checkbox" name="emailConsent" id="emailConsent">
+                            <span class="checkmark"></span>
+                            <span class="consent-text">
+                                J'accepte d'être contacté(e) par email pour plus de questions
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button type="button" class="btn-cancel" id="cancelBtn">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            Envoyer
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Message (hidden by default) -->
+            <div class="success-message" id="successMessage" style="display: none;">
+                <div class="success-icon">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+                <h2>Merci pour votre retour !</h2>
+                <p>Votre avis nous aide à améliorer nos services.</p>
+                <button class="btn-primary" onclick="resetForm()">
+                    Donner un autre avis
+                </button>
+                <a href="/" class="btn-secondary">
+                    Retour à l'accueil
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/protected/home.js"></script>
+    <script src="/js/protected/feedback.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@ const preventUnprotectedAccess = require('../middleware/preventUnprotectedAccess
 
 // Route page de connexion
 router.get('/',preventUnprotectedAccess.preventAuthenticatedAccess, (req, res) => {
-  res.sendFile(path.join(__dirname,'..' , 'public', 'login.html'));
+  res.render('login' , { });
 });
 
 

@@ -11,4 +11,5 @@ async function logoutUser() {
   credentials: 'include'
 });
 
+
 }

@@ -7,7 +7,7 @@ const preventUnprotectedAccess = require('../middleware/preventUnprotectedAccess
 
 // Route page d'inscription
 router.get('/',preventUnprotectedAccess.preventAuthenticatedAccess, (req, res) => {
-  res.sendFile(path.join(__dirname,'..' , 'public', 'signup.html'));
+  res.render('signup' , { });
 });
 
 
