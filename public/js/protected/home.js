@@ -4,11 +4,90 @@
         const logoToggle = document.getElementById('logoToggle');
         const mainContent = document.getElementById('mainContent');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const avatarInitials =document.getElementById('avatarInitials');
+        const displayName = document.getElementById('displayName');
+        const totalPurchase = document.getElementById('totalPurchase');
+        const displayEmail = document.getElementById('displayEmail');
+        const clientPoints = document.getElementById('clientPoints');
+        const clientRank = document.getElementById('clientRank');
+        const nom = document.getElementById('nom');
+        const prenom = document.getElementById('prenom');
+        const email = document.getElementById('email');
+        const numero = document.getElementById('numero');
+        const adresse = document.getElementById('adresse');
+        const ville = document.getElementById('ville');
+        const genre = document.getElementById('genre');
+        const dateNaissance = document.getElementById('dateNaissance');
+        const lastTimePasswordChanged = document.getElementById('lastTimePasswordChanged');
+        let data;
 
+        
+        document.addEventListener('DOMContentLoaded' , async () => {
+            await load();
+            renderData();
+        });
         // Fonction pour toggle le sidebar
+        async function load(){
+            await loadData();
+            await loadTotalPurchase();
+
+        }
+        async function loadData(){
+            const fetcher = await fetch('/user/load' , {credentials: 'include'});
+            const result = await fetcher.json();
+            if(result.success){
+             data = result.data;
+
+        
+        }else{
+            alert('not loaded but fetch working');
+        }
+        
+
+        }
+        async function loadTotalPurchase(){
+            const fetcher = await fetch('/user/purchase' , {credentials: 'include'});
+            const result = await fetcher.json();
+        /*     alert(result.totalpurchase); */
+            if(result.success){
+             totalPurchase.innerText = result.totalpurchase;
+
+        
+        }else{
+            alert('not loaded but fetch purchase working');
+        }
+        }
+        function renderData() {
+            const name = data.firstName + " " + data.lastName;
+            avatarInitials.innerText = data.firstName[0] + data.lastName[0];
+            displayName.innerHTML = name;
+            displayEmail.innerHTML= data.email;
+            clientPoints.innerHTML = data.rewardPoints;
+            clientRank.innerHTML = data.rewardPoints <= 50 ? 'bronze' : (data.rewardPoints <= 100 ? 'argent' : 'or');
+            nom.setAttribute('placeholder' , data.firstName);
+            nom.value=data.firstName;
+            prenom.setAttribute('placeholder' , data.lastName);
+            prenom.value=data.lastName;
+            email.setAttribute('placeholder' , data.email);
+            email.value=data.email;
+            numero.setAttribute('placeholder' , data.phoneNumber === undefined || data.phoneNumber === null ? '+261...' : data.phoneNumber.trim());
+            numero.value=data.phoneNumber === undefined || data.phoneNumber === null  ? '+261' : data.phoneNumber.trim();
+            adresse.setAttribute('placeholder' , data.adress === undefined || data.adress === null ? 'Pas encore d\' addresse ' : data.adress.trim());
+            adresse.value=  data.adress === undefined || data.adress === null ? '' : data.adress.trim();
+            ville.setAttribute('placeholder' , data.city === null || data.city === undefined ? 'Entrez la ville ou vous vous situez' : data.city);
+            ville.value=data.city === undefined || data.city === null ? '' : data.city;
+            lastTimePasswordChanged.innerText=data.lastPasswordChanged;
+
+            dateNaissance.value = data.birthdate.trim();
+            genre.value = data.gender=='male' ?'homme' : (data.gender == 'female' ? 'femme' : 'autre');
+            console.table(data);
+        }
+
         function toggleSidebar() {
             sidebar.classList.toggle('collapsed');
             mainContent.classList.toggle('expanded');
+
+
         }
 
         // Toggle avec le bouton hamburger
@@ -54,14 +133,21 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const currentPath = window.location.pathname;
         
+        navLinks.forEach(link => link.classList.remove('active'));
+        
         navLinks.forEach(link => {
             // Marquer le lien actif en fonction de l'URL (sauf pour le logout)
-            if (link.id !== 'logoutBtn') {
-                const linkPath = link.getAttribute('href');
+  
+                  const linkPath = link.getAttribute('href');
+            if (linkPath !== null) {
+
+
                 if (linkPath === currentPath || (currentPath === '/' && linkPath === '/')) {
+
                     link.classList.add('active');
                 }
             }
+
         });
 
         // Logout avec confirmation

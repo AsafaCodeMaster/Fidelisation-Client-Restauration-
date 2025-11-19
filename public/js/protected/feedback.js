@@ -230,8 +230,9 @@ if (feedbackForm) {
             };
             
             // Submit to API
-            const response = await fetch('/api/feedback/submit', {
+            const response = await fetch('/feedback/submit', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },

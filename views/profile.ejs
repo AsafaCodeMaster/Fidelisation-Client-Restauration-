@@ -25,25 +25,25 @@
             <div class="profile-header">
                 <div class="profile-header-content">
                     <div class="profile-avatar-large">
-                        <span id="avatarInitials">JD</span>
+                        <span id="avatarInitials"></span>
                         <div class="avatar-upload-btn" title="Changer l'avatar">
                             <i class="bi bi-camera-fill"></i>
                         </div>
                     </div>
                     <div class="profile-header-info">
-                        <h1 id="displayName">John Doe</h1>
-                        <p id="displayEmail">john.doe@example.com</p>
+                        <h1 id="displayName"></h1>
+                        <p id="displayEmail"></p>
                         <div class="profile-stats">
                             <div class="stat-item">
-                                <div class="stat-value">1,234</div>
+                                <div id="clientPoints" class="stat-value"></div>
                                 <div class="stat-label">Points</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-value">24</div>
+                                <div class="stat-value" id="totalPurchase"></div>
                                 <div class="stat-label">Achats</div>
                             </div>
                             <div class="stat-item">
-                                <div class="stat-value">Gold</div>
+                                <div id="clientRank" class="stat-value"></div>
                                 <div class="stat-label">Statut</div>
                             </div>
                         </div>
@@ -74,8 +74,7 @@
                             </label>
                             <div class="input-group">
                                 <i class="bi bi-person input-icon"></i>
-                                <input type="text" class="form-input" id="nom" name="nom" 
-                                       placeholder="Doe" value="Doe" disabled required>
+                                <input type="text" class="form-input" id="nom" name="nom" disabled required>
                             </div>
                         </div>
 
@@ -85,8 +84,7 @@
                             </label>
                             <div class="input-group">
                                 <i class="bi bi-person input-icon"></i>
-                                <input type="text" class="form-input" id="prenom" name="prenom" 
-                                       placeholder="John" value="John" disabled required>
+                                <input type="text" class="form-input" id="prenom" name="prenom" disabled required>
                             </div>
                         </div>
 
@@ -96,8 +94,7 @@
                             </label>
                             <div class="input-group">
                                 <i class="bi bi-envelope input-icon"></i>
-                                <input type="email" class="form-input" id="email" name="email" 
-                                       placeholder="john.doe@example.com" value="john.doe@example.com" disabled required>
+                                <input type="email" class="form-input" id="email" name="email" disabled >
                             </div>
                         </div>
 
@@ -107,8 +104,7 @@
                             </label>
                             <div class="input-group">
                                 <i class="bi bi-telephone input-icon"></i>
-                                <input type="tel" class="form-input" id="numero" name="numero" 
-                                       placeholder="+33 6 12 34 56 78" value="" disabled>
+                                <input type="tel" class="form-input" id="numero" name="numero"  disabled >
                             </div>
                         </div>
 
@@ -118,8 +114,7 @@
                             </label>
                             <div class="input-group">
                                 <i class="bi bi-geo-alt input-icon"></i>
-                                <input type="text" class="form-input" id="adresse" name="adresse" 
-                                       placeholder="123 Rue de la Paix" value="" disabled>
+                                <input type="text" class="form-input" id="adresse" name="adresse"  disabled>
                             </div>
                         </div>
 
@@ -154,7 +149,6 @@
                                 <option value="homme">Homme</option>
                                 <option value="femme">Femme</option>
                                 <option value="autre">Autre</option>
-                                <option value="non-precise">Préfère ne pas préciser</option>
                             </select>
                         </div>
                     </div>
@@ -186,7 +180,7 @@
                 <div class="form-group">
                     <label class="form-label">Mot de passe</label>
                     <p style="color: var(--text-gray); font-size: 0.875rem; margin-bottom: 1rem;">
-                        Dernière modification : il y a 3 mois
+                        Dernière modification : <span id="lastTimePasswordChanged"></span>
                     </p>
                     <a href="/change-password" class="btn btn-primary">
                         <i class="bi bi-key-fill"></i>
@@ -251,7 +245,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="cancelDeleteBtn">Annuler</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteBtn" disabled>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn" >
                     <i class="bi bi-trash"></i>
                     Supprimer définitivement
                 </button>

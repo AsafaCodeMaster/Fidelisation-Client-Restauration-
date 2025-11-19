@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page non trouvée</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <% if (locals.isAuthenticated) { %>
+        <!-- Authenticated user styles -->
+        <link rel="stylesheet" href="/css/protected/home.css">
+    <% } %>
+    
+    <link rel="stylesheet" href="/css/protected/404.css">
+</head>
+<body>
+    <% if (locals.isAuthenticated) { %>
+        <!-- Include Sidebar for authenticated users -->
+        <%- include('partials/sidebar') %>
+    <% } %>
+
+    <!-- Main Content -->
+    <main class="<%= locals.isAuthenticated ? 'main-content' : 'standalone-content' %>" id="mainContent">
+        <div class="error-container">
+            <div class="error-content">
+                <!-- 404 Animation -->
+                <div class="error-number">
+                    <span class="digit">4</span>
+                    <span class="digit zero">
+                        <i class="bi bi-question-circle"></i>
+                    </span>
+                    <span class="digit">4</span>
+                </div>
+
+                <!-- Error Message -->
+                <h1 class="error-title">Page non trouvée</h1>
+                <p class="error-description">
+                    Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
+                </p>
+
+                <!-- Search Box -->
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Rechercher une page..."
+                        autocomplete="off">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="<%= locals.isAuthenticated ? '/' : '/login' %>" class="btn-primary">
+                        <i class="bi bi-house"></i>
+                        <% if (locals.isAuthenticated) { %>
+                            Retour à l'accueil
+                        <% } else { %>
+                            Page de connexion
+                        <% } %>
+                    </a>
+                    
+                    <button class="btn-secondary" onclick="history.back()">
+                        <i class="bi bi-arrow-left"></i>
+                        Retour
+                    </button>
+                </div>
+
+                <!-- Quick Links -->
+                <% if (locals.isAuthenticated) { %>
+                    <div class="quick-links">
+                        <p class="links-title">Pages populaires :</p>
+                        <div class="links-grid">
+                            <a href="/points" class="quick-link">
+                                <i class="bi bi-gem"></i>
+                                Mes Points
+                            </a>
+                            <a href="/orders" class="quick-link">
+                                <i class="bi bi-bag-check"></i>
+                                Commander
+                            </a>
+                            <a href="/rewards-history" class="quick-link">
+                                <i class="bi bi-trophy"></i>
+                                Récompenses
+                            </a>
+                            <a href="/profile" class="quick-link">
+                                <i class="bi bi-person"></i>
+                                Profil
+                            </a>
+                        </div>
+                    </div>
+                <% } %>
+
+                <!-- Footer Info -->
+                <div class="error-footer">
+                    <p>Code d'erreur: <strong>404</strong></p>
+                    <p>Si le problème persiste, contactez le support</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <% if (locals.isAuthenticated) { %>
+        <!-- Include sidebar script for authenticated users -->
+        <script src="/js/protected/home.js"></script>
+    <% } %>
+    
+    <script src="/js/protected/notFound.js"></script>
+</body>
+</html>

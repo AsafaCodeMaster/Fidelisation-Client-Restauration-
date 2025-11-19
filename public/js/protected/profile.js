@@ -137,8 +137,9 @@ profileForm.addEventListener('submit', async (e) => {
         const formData = new FormData(profileForm);
         const data = Object.fromEntries(formData.entries());
         
-        const response = await fetch('/api/profile/update', {
+        const response = await fetch('/profile/update', {
             method: 'POST',
+            credentials : 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -146,10 +147,9 @@ profileForm.addEventListener('submit', async (e) => {
         });
         
         const result = await response.json();
-        
         if (response.ok && result.success) {
             showAlert('success', 'Profil mis à jour avec succès !');
-            
+
             // Update header display
             document.getElementById('displayName').textContent = `${prenom} ${nom}`;
             document.getElementById('displayEmail').textContent = email;
@@ -213,6 +213,7 @@ confirmDeleteInput.addEventListener('input', (e) => {
 
 // Confirm delete account
 confirmDeleteBtn.addEventListener('click', async () => {
+    alert('yes , it is clicked');
     const confirmText = confirmDeleteInput.value.trim();
     
     if (confirmText !== 'SUPPRIMER') {
@@ -230,8 +231,9 @@ confirmDeleteBtn.addEventListener('click', async () => {
     confirmDeleteBtn.disabled = true;
     
     try {
-        const response = await fetch('/api/profile/delete', {
+        const response = await fetch('/profile/delete', {
             method: 'DELETE',
+            credentials : 'include',
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -242,8 +244,14 @@ confirmDeleteBtn.addEventListener('click', async () => {
         if (response.ok && result.success) {
             showAlert('success', 'Compte supprimé. Redirection...');
             
-            setTimeout(() => {
-                window.location.href = '/logout';
+            setTimeout(async () => {
+                await fetch('/logout', {
+            method: 'POST',
+            credentials : 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
             }, 2000);
             
         } else {
@@ -268,30 +276,40 @@ avatarUploadBtn.addEventListener('click', () => {
     showAlert('info', 'Fonctionnalité de changement d\'avatar à venir !');
     // TODO: Implémenter l'upload d'avatar
 });
-
-// Phone number formatting
+// Phone number validation rules:
+// +###########  (max 13 chars, + only at start)
+// OR
+// ##########   (max 10 digits)
+//new phone input conditions
 const phoneInput = document.getElementById('numero');
+
 if (phoneInput) {
     phoneInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, '');
-        
-        // Format: +33 6 12 34 56 78
-        if (value.startsWith('33')) {
-            value = value.substring(2);
-        } else if (value.startsWith('0')) {
-            value = value.substring(1);
-        }
-        
-        if (value.length > 0) {
-            let formatted = '+33 ';
-            for (let i = 0; i < value.length && i < 9; i++) {
-                if (i > 0 && i % 2 === 0) {
-                    formatted += ' ';
-                }
-                formatted += value[i];
+        let value = e.target.value;
+
+        // If starts with +
+        if (value.startsWith('+')) {
+            // Remove everything after + that is not a digit
+            value = '+' + value.substring(1).replace(/\D/g, '');
+
+            // Enforce max length 13
+            if (value.length > 13) {
+                value = value.substring(0, 13);
             }
-            e.target.value = formatted.trim();
+        } 
+        
+        else {
+            // Remove all non-digits
+            value = value.replace(/\D/g, '');
+
+            // Enforce max length 10
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
         }
+
+        // Set the cleaned value
+        e.target.value = value;
     });
 }
 
@@ -375,6 +393,9 @@ function loadDraftFromLocalStorage() {
                     }
                     // Activate edit mode
                     editToggle.click();
+                }else{
+                    alert('yes continue');
+                    localStorage.removeItem('profile_draft');
                 }
             }
         } catch (e) {

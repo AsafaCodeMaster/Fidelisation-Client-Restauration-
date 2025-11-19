@@ -267,8 +267,9 @@ function setupFormSubmission() {
         
         try {
             // Submit to API
-            const response = await fetch('/api/password/change', {
+            const response = await fetch('/change-password', {
                 method: 'POST',
+                credentials : 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },

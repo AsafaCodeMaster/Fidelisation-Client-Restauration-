@@ -18,7 +18,7 @@ async function connectClient(req, res) {
     );
 
     if (rows.length === 0) {
-      return res.status(404).send('User not found');
+       res.status(404).send('User not found');
     }
 
     const user = rows[0];

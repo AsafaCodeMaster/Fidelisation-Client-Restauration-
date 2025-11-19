@@ -23,5 +23,41 @@ async function getClientPurchaseHistory(req, res) {
     res.status(500).send('Error retrieving client info');
   }
 }
+async function loadPurchases(req , res) {
+  console.log('hey there ');
+  try {
+    const userId = req.userId;
+    const query = `SELECT * FROM sold_products WHERE id_client = ?`;
+    const [purchases] =  await db.execute(query , [userId]);
+    console.table(purchases);
+    const productQuery = `SELECT name FROM products WHERE id = ?`;
+    const purchaseData = await Promise.all(
+      purchases.map(async (purchase) => {
+        const [product] = await db.execute(productQuery, [purchase.id_product]);
+        return {
+          id: purchase.id,
+          type: purchase.type,
+          name: product[0]?.name || "Unknown Product",
+          unitPrice: Number(purchase.price),
+          quantity: purchase.quantity,
+          date: purchase.sale_date,
+          description: "Optional description",
+        };
+      })
+    );
+    
+    res.json({
+      success : true,
+      data : purchaseData
+    });
 
-module.exports = { getClientPurchaseHistory };
+  } catch (e) {
+    // 💡 Ajoutez l'affichage de l'erreur complète pour le débogage serveur
+    console.error('Erreur lors du chargement des achats:', e); 
+    
+    // 💡 Renvoyez un statut HTTP 500 pour indiquer une erreur serveur
+    res.status(500).json({"success" : false, message: "Erreur serveur interne."});
+  }
+}
+
+module.exports = { getClientPurchaseHistory , loadPurchases };

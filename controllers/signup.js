@@ -1,10 +1,8 @@
 const db = require('../config/database');
-const bcrypt = require('bcrypt');
 
-async function addClient(req, res) {
+async function addClient(req, res , next) {
   try {
     // hash the password
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     // Determine which contact is provided
     const phone = req.body.contact.match(/^\d+$/) ? req.body.contact : '';
@@ -40,16 +38,29 @@ async function addClient(req, res) {
       req.body.prenom,
       phone,
       email,
-      hashedPassword
+      req.body.password
     ]);
 
     // send response
-    res.status(201).send('Client successfully registered!');
+  /*   const phoneRegex = /^\+?[\d\s-]{6,20}$/;
+    if(!(phoneRegex.test(req.body.contact)))  return next();
+        res.redirect('/login'); */
+  return next();
 
   } catch (error) {
     console.error(error);
     res.status(500).send('Error during registration.');
   }
 }
+async function deleteOptin(req, res) {
+  const optin = req.body.optinCode;
 
-module.exports = { addClient };
+      await db.execute(
+      'DELETE FROM pending WHERE verification_code = ?',
+      [optin]
+    );
+    return res.redirect('/login');
+  
+}
+
+module.exports = { addClient , deleteOptin };

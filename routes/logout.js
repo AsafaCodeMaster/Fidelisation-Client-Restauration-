@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/', (req, res) => {
+    console.log('hehehe');
     // 1. SUPPRIMER le token/cookie du côté client (cette ligne modifie seulement les headers)
    res.clearCookie('token'); 
 

@@ -48,6 +48,9 @@
     margin-bottom: 2rem;
 }
 
+body.light-theme .summary-card{
+    background: #ffffff;
+}
 .summary-card {
     background: var(--dark-bg);
     border: 1px solid rgba(220, 38, 38, 0.2);
@@ -178,6 +181,16 @@
     margin-bottom: 1.5rem;
 }
 
+body.light-theme .toolbar-card,
+body.light-theme .toolbar-left ,
+body.light-theme .toolbar-right , 
+body.light-theme .filter-select,
+body.light-theme .btn-icon,
+body.light-theme .search-input,
+body.light-theme .action-btn{
+   background: #ffffff;
+   color : var(--dark-bg);
+}
 .toolbar-card {
     background: var(--dark-bg);
     border: 1px solid rgba(220, 38, 38, 0.2);
@@ -331,6 +344,10 @@
 /* Table Section */
 .table-section {
     margin-bottom: 2rem;
+}
+
+body.light-theme .table-card{
+    background: #ffffff;
 }
 
 .table-card {

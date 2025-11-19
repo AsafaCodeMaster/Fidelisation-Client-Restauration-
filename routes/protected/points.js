@@ -6,3 +6,5 @@ const decodeToken = require('../../middleware/decodeToken');
 
 router.get('/' ,profileMiddelware.verifyToken,decodeToken.extractUser,  pointsController.getClientPoints);
 module.exports = router;
+
+router.get('/load' ,pointsController.loadOrders);

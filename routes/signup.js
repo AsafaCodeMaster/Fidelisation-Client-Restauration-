@@ -4,14 +4,15 @@ const router = express.Router();
 // Importe les fonctions de logique métier
 const signupController = require('../controllers/signup');
 const preventUnprotectedAccess = require('../middleware/preventUnprotectedAccess');
+const optin = require('../middleware/optin');
 
 // Route page d'inscription
 router.get('/',preventUnprotectedAccess.preventAuthenticatedAccess, (req, res) => {
-  res.render('signup' , { });
+  res.render('signup' , { optin : false});
 });
 
 
-router.post('/' , signupController.addClient);
+router.post('/' ,preventUnprotectedAccess.preventAuthenticatedAccess , optin.verifyOptinCode, signupController.addClient , signupController.deleteOptin);
 /*
 // Route API pour l'inscription
 router.post('/', (req, res) => {

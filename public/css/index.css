@@ -62,7 +62,9 @@
         .logo-placeholder {
             color: white;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 10px;
+            height : 100%;
+            width : 100%;
         }
 
         .theme-toggle {

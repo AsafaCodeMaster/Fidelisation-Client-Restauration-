@@ -1,28 +1,9 @@
-// Points Page JavaScript
 
-// Sample data (replace with API call in production)
-let pointsData = [
-    { id: 1, type: 'earned', date: '2025-01-15T10:30:00', description: 'Achat de 50€', points: 50, balance: 1234, status: 'completed' },
-    { id: 2, type: 'earned', date: '2025-01-14T14:20:00', description: 'Bonus de bienvenue', points: 100, balance: 1184, status: 'completed' },
-    { id: 3, type: 'used', date: '2025-01-13T16:45:00', description: 'Réduction sur commande #1523', points: -30, balance: 1084, status: 'completed' },
-    { id: 4, type: 'earned', date: '2025-01-12T09:15:00', description: 'Parrainage ami', points: 75, balance: 1114, status: 'completed' },
-    { id: 5, type: 'used', date: '2025-01-11T11:30:00', description: 'Cadeau premium', points: -200, balance: 1039, status: 'completed' },
-    { id: 6, type: 'earned', date: '2025-01-10T13:00:00', description: 'Achat de 120€', points: 120, balance: 1239, status: 'completed' },
-    { id: 7, type: 'earned', date: '2025-01-09T15:45:00', description: 'Bonus anniversaire', points: 50, balance: 1119, status: 'completed' },
-    { id: 8, type: 'used', date: '2025-01-08T10:20:00', description: 'Livraison gratuite', points: -15, balance: 1069, status: 'completed' },
-    { id: 9, type: 'earned', date: '2025-01-07T12:10:00', description: 'Achat de 75€', points: 75, balance: 1084, status: 'completed' },
-    { id: 10, type: 'earned', date: '2025-01-06T14:30:00', description: 'Programme fidélité', points: 25, balance: 1009, status: 'completed' },
-    { id: 11, type: 'used', date: '2025-01-05T16:00:00', description: 'Réduction VIP', points: -50, balance: 984, status: 'completed' },
-    { id: 12, type: 'earned', date: '2025-01-04T09:45:00', description: 'Avis client', points: 10, balance: 1034, status: 'completed' },
-    { id: 13, type: 'earned', date: '2025-01-03T11:20:00', description: 'Achat de 200€', points: 200, balance: 1024, status: 'completed' },
-    { id: 14, type: 'used', date: '2025-01-02T13:15:00', description: 'Produit exclusif', points: -100, balance: 824, status: 'completed' },
-    { id: 15, type: 'earned', date: '2025-01-01T15:00:00', description: 'Bonus nouvel an', points: 50, balance: 924, status: 'completed' }
-];
-
+let pointsData = [];
 // State management
 let currentPage = 1;
 const itemsPerPage = 10;
-let filteredData = [...pointsData];
+let filteredData = [];
 let sortColumn = 'date';
 let sortDirection = 'desc';
 
@@ -41,13 +22,30 @@ const resultCount = document.getElementById('resultCount');
 const pagination = document.getElementById('pagination');
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    initializeFilters();
-    updateSummaryCards();
-    renderTable();
-    setupEventListeners();
-    console.log('✅ Points page initialized');
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadPointsFromServer();
+  initializeFilters();
+  updateSummaryCards();
+  renderTable();
+  setupEventListeners();
+  console.log('✅ Points page initialized with database data');
 });
+async function loadPointsFromServer() {
+  try {
+/*     const response = await fetch('/points/load'); // Adjust route if needed
+    const result = await response.json(); */
+const response = await fetch('/points/load', { credentials: 'include' });
+const result = await response.json();
+ pointsData = result.data;
+   
+      filteredData = [...pointsData];
+    
+        
+  } catch (error) {
+    console.error('❌ Error loading points from server:', error);
+  }
+}
 
 // Alert function
 function showAlert(type, message, duration = 5000) {
@@ -87,7 +85,7 @@ function closeAlert(alertId) {
 }
 
 // Initialize filters
-function initializeFilters() {
+async function initializeFilters() {
     const today = new Date();
     endDate.value = today.toISOString().split('T')[0];
     
@@ -97,14 +95,14 @@ function initializeFilters() {
 
 // Update summary cards
 function updateSummaryCards() {
-    const earned = pointsData.filter(p => p.type === 'earned').reduce((sum, p) => sum + p.points, 0);
-    const used = Math.abs(pointsData.filter(p => p.type === 'used').reduce((sum, p) => sum + p.points, 0));
-    const total = earned - used;
-    const rate = earned > 0 ? ((used / earned) * 100).toFixed(1) : 0;
+    const purchase = pointsData.filter(p => p.type === 'purchase').reduce((sum, p) => sum + p.points, 0);
+    const reward = Math.abs(pointsData.filter(p => p.type === 'reward').reduce((sum, p) => sum + p.points, 0));
+    const total = purchase - reward;
+    const rate = purchase > 0 ? ((reward / purchase) * 100).toFixed(1) : 0;
     
     document.getElementById('totalPoints').textContent = formatNumber(total);
-    document.getElementById('earnedPoints').textContent = formatNumber(earned);
-    document.getElementById('usedPoints').textContent = formatNumber(used);
+    document.getElementById('earnedPoints').textContent = formatNumber(purchase);
+    document.getElementById('usedPoints').textContent = formatNumber(reward);
     
     const rateCard = document.querySelector('.rate-card .card-value');
     if (rateCard) rateCard.textContent = rate + '%';
@@ -120,6 +118,7 @@ function formatNumber(num) {
 
 // Setup event listeners
 function setupEventListeners() {
+
     if (!typeFilter || !periodFilter || !searchInput || !exportBtn || !resetFiltersBtn) return;
     
     // Filters
@@ -181,7 +180,8 @@ function handlePeriodChange() {
 
 // Apply filters
 function applyFilters() {
-    filteredData = [...pointsData];
+   filteredData = pointsData;
+  
     
     // Type filter
     const type = typeFilter.value;
@@ -308,24 +308,24 @@ function renderTable() {
             <tr>
                 <td>#${item.id}</td>
                 <td>
-                    <span class="type-badge ${item.type}">
-                        <i class="bi bi-${item.type === 'earned' ? 'plus-circle' : 'dash-circle'}"></i>
-                        ${item.type === 'earned' ? 'Gagné' : 'Utilisé'}
+                    <span class="type-badge ${item.type=='purchase' ? 'earned' : 'used'}">
+                        <i class="bi bi-${item.type === 'purchase' ? 'plus-circle' : 'dash-circle'}"></i>
+                        ${item.type === 'purchase' ? 'Gagné' : 'Utilisé'}
                     </span>
                 </td>
                 <td>${formatDate(item.date)}</td>
                 <td>${item.description}</td>
                 <td>
-                    <span class="points-display ${item.points > 0 ? 'positive' : 'negative'}">
-                        <i class="bi bi-${item.points > 0 ? 'arrow-up' : 'arrow-down'}"></i>
-                        ${item.points > 0 ? '+' : ''}${formatNumber(item.points)} pts
+                    <span class="points-display ${item.type === 'purchase'  ? 'positive' : 'negative'}">
+                        <i class="bi bi-${item.type === 'purchase' ? 'arrow-up' : 'arrow-down'}"></i>
+                        ${item.type === 'purchase'? '+' : '-'}${formatNumber(item.points)} pts
                     </span>
                 </td>
                 <td>${formatNumber(item.balance)} pts</td>
                 <td>
                     <span class="status-badge ${item.status}">
                         <i class="bi bi-${getStatusIcon(item.status)}"></i>
-                        ${getStatusLabel(item.status)}
+                        ${getStatusLabel(item.status , item.type)}
                     </span>
                 </td>
                 <td class="text-center">
@@ -360,18 +360,18 @@ function formatDate(dateString) {
 function getStatusIcon(status) {
     const icons = {
         completed: 'check-circle-fill',
-        pending: 'clock-fill',
-        expired: 'x-circle-fill'
+        pending: 'clock-fill'/* ,
+        expired: 'x-circle-fill' */
     };
     return icons[status] || 'info-circle-fill';
 }
 
 // Get status label
-function getStatusLabel(status) {
+function getStatusLabel(status , type) {
     const labels = {
-        completed: 'Complété',
-        pending: 'En attente',
-        expired: 'Expiré'
+        completed: type == 'purchase' ? 'payée' : 'reçu',
+        pending: 'En attente'
+/*         expired: 'Expiré' */
     };
     return labels[status] || status;
 }
@@ -476,7 +476,9 @@ function changePage(page) {
 // View details modal
 function viewDetails(id) {
     const item = pointsData.find(p => p.id === id);
-    if (!item) return;
+    if (!item){ /* alert('it is not working as expected ' + pointsData);
+        alert('pointsData is ' +pointsData[0].id); */
+        return;}
     
     const modal = document.getElementById('detailsModal');
     const modalBody = document.getElementById('modalBody');
@@ -492,8 +494,8 @@ function viewDetails(id) {
             <span class="detail-label">Type</span>
             <span class="detail-value">
                 <span class="type-badge ${item.type}">
-                    <i class="bi bi-${item.type === 'earned' ? 'plus-circle' : 'dash-circle'}"></i>
-                    ${item.type === 'earned' ? 'Points Gagnés' : 'Points Utilisés'}
+                    <i class="bi bi-${item.type === 'purchase' ? 'plus-circle' : 'dash-circle'}"></i>
+                    ${item.type === 'purchase' ? 'Points Gagnés' : 'Points Utilisés'}
                 </span>
             </span>
         </div>
@@ -508,8 +510,8 @@ function viewDetails(id) {
         <div class="detail-row">
             <span class="detail-label">Points</span>
             <span class="detail-value">
-                <span class="points-display ${item.points > 0 ? 'positive' : 'negative'}">
-                    ${item.points > 0 ? '+' : ''}${formatNumber(item.points)} points
+                <span class="points-display ${item.type === 'purchase' ? 'positive' : 'negative'}">
+                    ${item.type === 'purchase' ? '+' : '-'}${formatNumber(item.points)} points
                 </span>
             </span>
         </div>
@@ -522,7 +524,7 @@ function viewDetails(id) {
             <span class="detail-value">
                 <span class="status-badge ${item.status}">
                     <i class="bi bi-${getStatusIcon(item.status)}"></i>
-                    ${getStatusLabel(item.status)}
+                    ${getStatusLabel(item.status , item.type)}
                 </span>
             </span>
         </div>
@@ -584,12 +586,12 @@ function generateCSV() {
     const headers = ['ID', 'Type', 'Date', 'Description', 'Points', 'Solde Après', 'Statut'];
     const rows = filteredData.map(item => [
         item.id,
-        item.type === 'earned' ? 'Gagné' : 'Utilisé',
+        item.type === 'purchase' ? 'Gagné' : 'Utilisé',
         formatDate(item.date),
         item.description,
         item.points,
         item.balance,
-        getStatusLabel(item.status)
+        getStatusLabel(item.status , item.type)
     ]);
     
     let csv = headers.join(',') + '\n';

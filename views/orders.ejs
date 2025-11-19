@@ -3,20 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - FidélityApp</title>
+    <title>Commander - FidélityApp</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/protected/home.css">
-    <link rel="stylesheet" href="/css/protected/profile.css">
-    <!-- Sidebar CSS (déjà inclus dans votre partial) -->
-    
- 
+    <link rel="stylesheet" href="/css/protected/orders.css">
 </head>
 <body>
     <!-- Include Sidebar Partial -->
     <%- include('partials/sidebar') %>
 
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="orders-container">
+            <!-- Header -->
+            <div class="orders-header">
+                <h1 class="page-title">
+                    <i class="bi bi-bag-check"></i>
+                    Commander
+                </h1>
+            </div>
 
-    <script src="/js/protected/profile.js"></script>
+            <div class="orders-layout">
+                <!-- Left Side - Products -->
+                <div class="products-section">
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <i class="bi bi-search"></i>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Rechercher un produit..."
+                            autocomplete="off">
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Products will be loaded here dynamically -->
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <i class="bi bi-inbox"></i>
+                        <p>Aucun produit trouvé</p>
+                    </div>
+                </div>
+
+                <!-- Right Side - Cart Summary -->
+                <div class="cart-section">
+                    <h2 class="cart-title">Panier</h2>
+
+                    <!-- Cart Items -->
+                    <div class="cart-items" id="cartItems">
+                        <div class="empty-cart">
+                            <i class="bi bi-cart"></i>
+                            <p>Votre panier est vide</p>
+                        </div>
+                    </div>
+
+                    <!-- Cart Summary -->
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Sous-total</span>
+                            <span id="subtotal">0.00 Ar</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Frais de service</span>
+                            <span id="serviceFee">0.00 Ar</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="total">0.00 ar</span>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Button -->
+                    <button class="checkout-btn" id="checkoutBtn" disabled>
+                        <i class="bi bi-check-circle"></i>
+                        Passer la commande
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <script src="/js/protected/home.js"></script>
+    <script src="/js/protected/orders.js"></script>
 </body>
-    </html>
+</html>

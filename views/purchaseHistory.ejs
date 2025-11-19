@@ -3,20 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - FidélityApp</title>
+    <title>Historique des transactions - FidélityApp</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/protected/home.css">
-    <link rel="stylesheet" href="/css/protected/profile.css">
-    <!-- Sidebar CSS (déjà inclus dans votre partial) -->
-    
- 
+    <link rel="stylesheet" href="/css/protected/transaction-history.css">
 </head>
 <body>
     <!-- Include Sidebar Partial -->
     <%- include('partials/sidebar') %>
 
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="history-container">
+            <!-- Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="bi bi-clock-history"></i>
+                    Historique des transactions
+                </h1>
+                <div class="points-badge">
+                    <i class="bi bi-gem"></i>
+                    <span id="currentPoints">0</span> points
+                </div>
+            </div>
 
-    <script src="/js/protected/profile.js"></script>
+            <!-- Filters -->
+            <div class="filters-card">
+                <div class="filter-group">
+                    <label>Type</label>
+                    <select id="typeFilter" class="filter-select">
+                        <option value="all">Tous</option>
+                        <option value="product">Produit</option>
+                        <option value="service">Service</option>
+                        <option value="reward">Récompense</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Période</label>
+                    <select id="periodFilter" class="filter-select">
+                        <option value="all">Tout</option>
+                        <option value="week">Cette semaine</option>
+                        <option value="month" selected>Ce mois</option>
+                        <option value="year">Cette année</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Recherche</label>
+                    <input type="text" id="searchInput" class="filter-input" placeholder="Rechercher...">
+                </div>
+
+                <button class="reset-btn" id="resetBtn">
+                    <i class="bi bi-arrow-clockwise"></i>
+                    Réinitialiser
+                </button>
+            </div>
+
+            <!-- Table -->
+            <div class="table-card">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>TYPE</th>
+                            <th>NOM</th>
+                            <th>PRIX UNITAIRE</th>
+                            <th>QUANTITÉE</th>
+                            <th>TOTAL</th>
+                            <th>DATE</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Dynamic content -->
+                    </tbody>
+                </table>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="bi bi-inbox"></i>
+                    <p>Aucune transaction trouvée</p>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-bar" id="paginationBar">
+                <div class="pagination-info">
+                    Affichage de <strong id="showingFrom">0</strong> à <strong id="showingTo">0</strong> 
+                    sur <strong id="totalItems">0</strong>
+                </div>
+                <div class="pagination-buttons" id="paginationButtons">
+                    <!-- Dynamic buttons -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Details Modal -->
+    <div id="detailsModal" class="modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Détails de la transaction</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-close" onclick="closeModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+
     <script src="/js/protected/home.js"></script>
+    <script src="/js/protected/transaction-history.js"></script>
 </body>
-    </html>
+</html>

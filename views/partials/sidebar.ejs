@@ -1,11 +1,11 @@
-  <aside class="sidebar" id="sidebar">
+  <aside class="sidebar collapsed" id="sidebar">
         <!-- Header -->
         <div class="sidebar-header">
             <div class="logo" id="logoToggle">
                 <div class="logo-icon">
                     <i class="bi bi-lightning-charge-fill"></i>
                 </div>
-                <span class="logo-text">FidelityApp</span>
+                <span class="logo-text">GastroFidelity</span>
             </div>
             <button class="toggle-btn" id="toggleBtn">
                 <i class="bi bi-list"></i>
@@ -93,10 +93,10 @@
         <!-- User Profile -->
         <div class="user-profile">
             <div class="user-info">
-                <div class="user-avatar">{{JD}}</div>
+                <div class="user-avatar"><%= myclient.first_name[0] %><%= myclient.last_name[0] %></div>
                 <div class="user-details">
                     <div class="user-name"><%= myclient.first_name %> <%= myclient.last_name %></div>
-                    <div class="user-email">{{john@example.com}}</div>
+                    <div class="user-email"><%= myclient.email %></div>
                 </div>
             </div>
         </div>

@@ -443,7 +443,7 @@
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
-                transform: translateX(-100%);
+                transform: translateX(-0%);
             }
 
             .sidebar.mobile-open {

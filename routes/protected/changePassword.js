@@ -5,4 +5,5 @@ const changePasswordController = require('../../controllers/changePassword');
 const decodeToken = require('../../middleware/decodeToken');
 
 router.get('/' ,Middelware.verifyToken,decodeToken.extractUser,  changePasswordController.getClientChangePassword);
+router.post('/' , Middelware.verifyToken,decodeToken.extractUser,  changePasswordController.change);
 module.exports = router;

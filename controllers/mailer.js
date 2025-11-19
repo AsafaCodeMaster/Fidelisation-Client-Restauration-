@@ -1,14 +1,18 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config();
 
+const nodemailer = require('nodemailer');
+require('dotenv').config({ path: __dirname + '/../.env' });
+const user = process.env.MAIL_USER;
+const passord =process.env.MAIL_PASS;
+console.log(user +'and' +passord);
 async function sendCodeEmail() {
+  
   try {
     // 1️⃣ Create the transporter
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'harenaft06@gmail.com',
-        pass: 'sjqglxdtxcnorxqi',
+        user:user,
+        pass:passord,
       },
     });
 

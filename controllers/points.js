@@ -1,5 +1,8 @@
 const db = require('../config/database');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 
+dotenv.config();
 async function getClientPoints(req, res) {
   try {
     const clientId = req.userId;
@@ -24,4 +27,45 @@ async function getClientPoints(req, res) {
   }
 }
 
-module.exports = { getClientPoints };
+async function loadOrders(req , res) {
+  const userCookie  = jwt.verify(req.cookies.token , process.env.SECRET_KEY);
+ 
+    try {
+    const userId = userCookie.userId; // from middleware
+    const [rows] = await db.execute(`
+      SELECT id, total_price, order_date, point, status , remaining_points , description , type
+      FROM orders
+      WHERE id_client = ?
+      ORDER BY order_date DESC
+    `, [userId]);
+      const pointsData = rows.map(row => {
+      const isEarned = row.type == 'purchase';
+      console.log(row.id);
+
+      return {
+        id: row.id,
+        type: isEarned ? 'purchase' : 'reward',
+        date: row.order_date,
+        description: isEarned
+          ? `Achat de ${row.total_price} Ar`
+          : row.description,
+        points: row.point,
+        balance: row.remaining_points ?? 0,
+        status: row.status == 'success' ? 'completed' : 'pending'
+      };
+    });
+
+    // Send formatted JSON
+    console.table(pointsData);
+    res.json({
+      success: true,
+      data: pointsData
+    });
+
+  } catch (err) {
+    console.error('DB Error:', err);
+    res.status(500).json({ success: false, message: 'Database error' });
+  }
+}
+
+module.exports = { getClientPoints , loadOrders};
