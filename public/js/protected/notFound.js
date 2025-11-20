@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Setup search
     setupSearch();
     
-    console.log('✅ 404 page initialized');
+    // console.log('✅ 404 page initialized');
 });
 
 // Load theme from localStorage
@@ -199,7 +199,7 @@ function activateEasterEgg() {
     `;
     document.head.appendChild(style);
 
-    console.log('🎉 Easter egg activated!');
+    // console.log('🎉 Easter egg activated!');
 }
 
 // Auto-redirect after inactivity (optional)
@@ -220,7 +220,7 @@ document.addEventListener('keydown', resetInactivityTimer);
 resetInactivityTimer();
 */
 
-console.log('🎯 Keyboard shortcuts:');
-console.log('  - Ctrl/Cmd + K : Focus search');
-console.log('  - Escape : Go back');
-console.log('  - Enter in search : Navigate to first result');
+// console.log('🎯 Keyboard shortcuts:');
+// console.log('  - Ctrl/Cmd + K : Focus search');
+// console.log('  - Escape : Go back');
+// console.log('  - Enter in search : Navigate to first result');

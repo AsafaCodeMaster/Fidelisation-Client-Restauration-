@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateSummaryCards();
   renderTable();
   setupEventListeners();
-  console.log('✅ Points page initialized with database data');
+  // console.log('✅ Points page initialized with database data');
 });
 async function loadPointsFromServer() {
   try {
@@ -43,7 +43,7 @@ const result = await response.json();
     
         
   } catch (error) {
-    console.error('❌ Error loading points from server:', error);
+    // console.error('❌ Error loading points from server:', error);
   }
 }
 
@@ -571,7 +571,7 @@ function exportData() {
             downloadCSV(csvContent, 'points_export.csv');
             showAlert('success', 'Export réussi ! Le fichier a été téléchargé.');
         } catch (error) {
-            console.error('Export error:', error);
+            // console.error('Export error:', error);
             showAlert('danger', 'Erreur lors de l\'export des données.');
         } finally {
             btn.classList.remove('loading');
@@ -707,7 +707,7 @@ function loadPreferences() {
             sortDirection = preferences.defaultSortDirection || 'desc';
             if (periodFilter) periodFilter.value = preferences.defaultPeriod || 'month';
         } catch (e) {
-            console.error('Error loading preferences:', e);
+            // console.error('Error loading preferences:', e);
         }
     }
 }
@@ -720,10 +720,10 @@ if (periodFilter) {
     periodFilter.addEventListener('change', savePreferences);
 }
 
-console.log('✅ Points page fully loaded');
-console.log('📊 Total transactions:', pointsData.length);
-console.log('🎯 Keyboard shortcuts:');
-console.log('  - Ctrl/Cmd + K : Rechercher');
-console.log('  - Ctrl/Cmd + R : Réinitialiser les filtres');
-console.log('  - Escape : Fermer le modal');
-console.log('  - ← → : Navigation pagination');
+// console.log('✅ Points page fully loaded');
+// console.log('📊 Total transactions:', pointsData.length);
+// console.log('🎯 Keyboard shortcuts:');
+// console.log('  - Ctrl/Cmd + K : Rechercher');
+// console.log('  - Ctrl/Cmd + R : Réinitialiser les filtres');
+// console.log('  - Escape : Fermer le modal');
+// console.log('  - ← → : Navigation pagination');

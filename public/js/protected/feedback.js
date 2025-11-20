@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupStarRatings();
     setupCharCounter();
     setupFormValidation();
-    console.log('✅ Feedback page initialized');
+    // console.log('✅ Feedback page initialized');
 });
 
 // Setup star ratings
@@ -256,7 +256,7 @@ if (feedbackForm) {
             }
             
         } catch (error) {
-            console.error('Submission error:', error);
+            // console.error('Submission error:', error);
             showAlert('danger', 'Erreur de connexion. Veuillez réessayer.');
             submitBtn.classList.remove('loading');
             submitBtn.innerHTML = originalText;
@@ -354,12 +354,12 @@ function trackFeedbackSubmission(data) {
         ? (ratings.reduce((sum, r) => sum + r, 0) / ratings.length).toFixed(2)
         : 0;
     
-    console.log('📊 Feedback submitted:', {
+   /*  console.log('📊 Feedback submitted:', {
         averageRating: avgRating,
         totalCategories: ratings.length,
         hasComment: data.libreExpression.length > 0,
         emailConsent: data.emailConsent
-    });
+    }); */
     
     // Optional: Send to analytics service
     // if (typeof gtag !== 'undefined') {
@@ -435,7 +435,7 @@ function loadDraft() {
                 localStorage.removeItem('feedback_draft');
             }
         } catch (e) {
-            console.error('Error loading draft:', e);
+            // console.error('Error loading draft:', e);
             localStorage.removeItem('feedback_draft');
         }
     }
@@ -565,7 +565,7 @@ function calculateRatingStats() {
 function showRatingPreview() {
     const stats = calculateRatingStats();
     if (stats) {
-        console.log('📊 Votre évaluation:', stats);
+        // console.log('📊 Votre évaluation:', stats);
     }
 }
 
@@ -576,7 +576,7 @@ document.querySelectorAll('.star-icon').forEach(star => {
     });
 });
 
-console.log('✅ Feedback page fully loaded');
-console.log('🎯 Keyboard shortcuts:');
-console.log('  - Ctrl/Cmd + Enter : Envoyer le feedback');
-console.log('  - Escape : Annuler');
+// console.log('✅ Feedback page fully loaded');
+// console.log('🎯 Keyboard shortcuts:');
+// console.log('  - Ctrl/Cmd + Enter : Envoyer le feedback');
+// console.log('  - Escape : Annuler');

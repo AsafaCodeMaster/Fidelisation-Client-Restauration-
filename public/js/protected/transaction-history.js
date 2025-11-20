@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTransactions();
     setupFilters();
     resetFilters();
-    console.log('✅ Transaction history page initialized');
+    // console.log('✅ Transaction history page initialized');
 });
 
 // Load current points
@@ -34,7 +34,7 @@ async function loadCurrentPoints() {
             currentPointsEl.textContent = result.points;
         }
     } catch (error) {
-        console.error('Error loading points:', error);
+        // console.error('Error loading points:', error);
     }
 }
 
@@ -49,7 +49,7 @@ async function loadTransactions() {
             applyFilters();
         }
     } catch (error) {
-        console.error('Error loading transactions:', error);
+        // console.error('Error loading transactions:', error);
     }
 }
 
@@ -316,7 +316,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-console.log('✅ Transaction history loaded');
+// console.log('✅ Transaction history loaded');
 
 // Export functionality (optional)
 function exportTransactions() {

@@ -48,7 +48,7 @@ async function addClient(req, res , next) {
   return next();
 
   } catch (error) {
-    console.error(error);
+/*     console.error(error); */
     res.status(500).send('Error during registration.');
   }
 }

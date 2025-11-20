@@ -24,12 +24,10 @@ async function getClientPurchaseHistory(req, res) {
   }
 }
 async function loadPurchases(req , res) {
-  console.log('hey there ');
   try {
     const userId = req.userId;
     const query = `SELECT * FROM sold_products WHERE id_client = ?`;
     const [purchases] =  await db.execute(query , [userId]);
-    console.table(purchases);
     const productQuery = `SELECT name FROM products WHERE id = ?`;
     const purchaseData = await Promise.all(
       purchases.map(async (purchase) => {

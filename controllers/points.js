@@ -22,7 +22,7 @@ async function getClientPoints(req, res) {
     res.render("points", { myclient });
 
   } catch (error) {
-    console.error(error);
+    // // console.error(error);
     res.status(500).send('Error retrieving client info');
   }
 }
@@ -40,7 +40,7 @@ async function loadOrders(req , res) {
     `, [userId]);
       const pointsData = rows.map(row => {
       const isEarned = row.type == 'purchase';
-      console.log(row.id);
+      // console.log(row.id);
 
       return {
         id: row.id,
@@ -56,14 +56,14 @@ async function loadOrders(req , res) {
     });
 
     // Send formatted JSON
-    console.table(pointsData);
+    // console.table(pointsData);
     res.json({
       success: true,
       data: pointsData
     });
 
   } catch (err) {
-    console.error('DB Error:', err);
+    // console.error('DB Error:', err);
     res.status(500).json({ success: false, message: 'Database error' });
   }
 }

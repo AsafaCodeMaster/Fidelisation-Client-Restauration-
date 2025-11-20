@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupTogglePassword();
     setupPasswordValidation();
     setupFormSubmission();
-    console.log('✅ Change password page initialized');
+    // console.log('✅ Change password page initialized');
 });
 
 // Setup toggle password visibility
@@ -286,7 +286,7 @@ function setupFormSubmission() {
                 showSuccessModal();
                 
                 // Track event
-                console.log('✅ Password changed successfully');
+                // console.log('✅ Password changed successfully');
                 
             } else {
                 // Show error
@@ -305,7 +305,7 @@ function setupFormSubmission() {
             }
             
         } catch (error) {
-            console.error('Submission error:', error);
+            // console.error('Submission error:', error);
             showAlert('danger', 'Erreur de connexion. Veuillez réessayer.');
             
             submitBtn.classList.remove('loading');
@@ -546,7 +546,7 @@ function showStrengthTip(strength) {
     const tip = strengthTips[strength];
     if (tip) {
         // Could show as tooltip or alert
-        console.log('💡 Conseil:', tip);
+        // console.log('💡 Conseil:', tip);
     }
 }
 
@@ -558,18 +558,18 @@ changePasswordForm.addEventListener('submit', () => {
     changeAttempts++;
     
     if (changeAttempts >= MAX_ATTEMPTS) {
-        console.warn('⚠️ Multiple password change attempts detected');
+        // console.warn('⚠️ Multiple password change attempts detected');
         // Could implement rate limiting here
     }
 });
 
-console.log('✅ Change password page fully loaded');
-console.log('🔒 Password requirements:');
-console.log('  - Minimum 8 characters');
-console.log('  - At least 1 uppercase letter');
-console.log('  - At least 1 lowercase letter');
-console.log('  - At least 1 number');
-console.log('  - At least 1 special character');
-console.log('🎯 Keyboard shortcuts:');
-console.log('  - Ctrl/Cmd + Enter : Soumettre');
-console.log('  - Escape : Annuler');
+// console.log('✅ Change password page fully loaded');
+// console.log('🔒 Password requirements:');
+// console.log('  - Minimum 8 characters');
+// console.log('  - At least 1 uppercase letter');
+// console.log('  - At least 1 lowercase letter');
+// console.log('  - At least 1 number');
+// console.log('  - At least 1 special character');
+// console.log('🎯 Keyboard shortcuts:');
+// console.log('  - Ctrl/Cmd + Enter : Soumettre');
+// console.log('  - Escape : Annuler');

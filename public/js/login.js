@@ -24,11 +24,11 @@
 
   if (response.ok) {
     // Store token in localStorage
-     alert('Login successful');
+     // alert('Login successful');
     window.location.href = '/profile';
   } else {
     const data = await response.text();
-    alert('Login failed: ' + data);
+    // alert('Login failed: ' + data);
     showPasswordError.innerHTML= data;
   }
 }

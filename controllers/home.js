@@ -19,7 +19,7 @@ async function getClientProfile(req, res) {
     res.render("home", { myclient });
 
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Error retrieving client info');
   }
 }

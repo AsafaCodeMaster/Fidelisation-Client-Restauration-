@@ -54,7 +54,7 @@ async function claim(req , res){
 }
 
 async function storeInOrders(rewardId , rewardInfo , userId , remainingPoints){
-        console.log("reward id is : " + rewardId);
+/*         // console.log("reward id is : " + rewardId); */
   const query =`INSERT INTO orders (id_client ,id_reward, point , remaining_points , description , type) VALUES (?,?,?,?,?,?)`;
   await db.execute(query , [userId ,rewardId, rewardInfo.points_required , remainingPoints , rewardInfo.name , 'reward']);
   return ;
@@ -70,7 +70,7 @@ async function clientRemainingPoints(id){
 async function history(req , res){
   const query = `SELECT * FROM  orders WHERE type = 'reward' AND id_client = ?`;
   const [orders] = await db.execute(query , [req.userId]);
-  console.log(req.userId);
+/*   console.log(req.userId); */
   const nameQuery = `SELECT name FROM rewards WHERE id = ?`;
   const mappedRewardHistory = await Promise.all(orders.map( async (order) =>{
     const [names] = await db.execute(nameQuery , [order.id_reward]);
@@ -86,7 +86,7 @@ async function history(req , res){
   );
 
 /*    const mappedReward = await Promise.all(mappedRewardHistory); */
-      console.table(mappedRewardHistory);
+/*       console.table(mappedRewardHistory); */
     res.json({
   success: true,
   data : mappedRewardHistory

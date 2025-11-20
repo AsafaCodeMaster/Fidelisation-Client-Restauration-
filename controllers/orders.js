@@ -21,7 +21,7 @@ async function getClientOrders(req, res) {
     res.render('orders', { myclient });
 
   } catch (error) {
-    console.error('Error retrieving client info:', error);
+    // console.error('Error retrieving client info:', error);
     res.status(500).send('Error retrieving client info');
   }
 }
@@ -52,7 +52,7 @@ async function create(req, res) {
     res.json({ success: true });
 
   } catch (error) {
-    console.error('Error creating order:', error);
+    // console.error('Error creating order:', error);
     res.status(500).json({ success: false, message: 'Order creation failed' });
   }
 }
@@ -76,7 +76,7 @@ async function storeOrder(req) {
     clientPoints + points
   ]);
 
-  console.log("Order inserted with ID:", result.insertId);
+  // console.log("Order inserted with ID:", result.insertId);
   return result.insertId; // Renvoie l'ID de la commande créée
 }
 
@@ -103,7 +103,7 @@ async function storeSoldProducts(req, orderId) {
   );
 
   await Promise.all(promises); // Attendre que toutes les insertions soient finies
-  console.log(`All sold products linked to order ${orderId} inserted.`);
+  // console.log(`All sold products linked to order ${orderId} inserted.`);
 }
 
 module.exports = { getClientOrders, create };

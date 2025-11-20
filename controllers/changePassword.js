@@ -25,7 +25,7 @@ async function getClientChangePassword(req, res) {
     res.render("changePassword", { myclient });
 
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Error retrieving client info');
   }
 }
@@ -42,7 +42,7 @@ SET hashed_password = ? WHERE email = ? OR phone_number = ?`;
 
 }
 async function change(req , res) {
-  console.log("change attempt detected");
+  // console.log("change attempt detected");
   const currentPassword = req.body.currentPassword;
   const newPassword = req.body.newPassword;
   try {
@@ -53,10 +53,10 @@ SET hashed_password = ? WHERE id = ?`;
   await db.execute(query , [password, req.userId]);
   res.json({success : true});
   }else{
-    console.log("wrong password");
+    // console.log("wrong password");
   }
   } catch (error) {
-    console.log("error changing password");
+    // console.log("error changing password");
   }
 
 }
@@ -68,7 +68,7 @@ async function verifyPassword(req , password) {
   
   return await bcrypt.compare(password ,client.hashed_password);
   } catch (error) {
-    console.log('cannot verify password during changes ' + error);
+    // console.log('cannot verify password during changes ' + error);
   }
 
 

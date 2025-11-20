@@ -18,7 +18,7 @@ const checkoutBtn = document.getElementById('checkoutBtn');
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     setupSearch();
-    console.log('✅ Orders page initialized');
+    // console.log('✅ Orders page initialized');
 });
 
 // Load products from API
@@ -34,7 +34,7 @@ async function loadProducts() {
             showError('Erreur lors du chargement des produits');
         }
     } catch (error) {
-        console.error('Error loading products:', error);
+        // console.error('Error loading products:', error);
         showError('Erreur de connexion');
     }
 }
@@ -194,16 +194,16 @@ if (checkoutBtn) {
             const result = await response.json();
 
             if (result.success) {
-                alert('✅ Commande passée avec succès !');
+                // alert('✅ Commande passée avec succès !');
                 cart = [];
                 updateCart();
                 searchInput.value = '';
             } else {
-                alert('❌ Erreur : ' + result.message);
+                // alert('❌ Erreur : ' + result.message);
             }
         } catch (error) {
-            console.error('Checkout error:', error);
-            alert('❌ Erreur de connexion');
+            // console.error('Checkout error:', error);
+            // alert('❌ Erreur de connexion');
         } finally {
             checkoutBtn.disabled = false;
             checkoutBtn.innerHTML = originalText;
@@ -229,5 +229,5 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-console.log('✅ Orders page loaded');
-console.log('🎯 Ctrl/Cmd + K : Focus recherche');
+// console.log('✅ Orders page loaded');
+// console.log('🎯 Ctrl/Cmd + K : Focus recherche');

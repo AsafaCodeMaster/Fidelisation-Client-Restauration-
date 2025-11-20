@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config({ path: __dirname + '/../.env' });
 const user = process.env.MAIL_USER;
 const passord =process.env.MAIL_PASS;
-console.log(user +'and' +passord);
+// console.log(user +'and' +passord);
 async function sendCodeEmail() {
   
   try {
@@ -27,9 +27,9 @@ async function sendCodeEmail() {
 
     // 3️⃣ Send the email
     const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Email sent:', info.response);
+    // console.log('✅ Email sent:', info.response);
   } catch (error) {
-    console.error('❌ Error sending email:', error.message);
+    // console.error('❌ Error sending email:', error.message);
   }
 }
 

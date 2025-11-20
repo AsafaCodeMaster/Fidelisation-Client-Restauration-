@@ -2,6 +2,7 @@
         const sidebar = document.getElementById('sidebar');
         const toggleBtn = document.getElementById('toggleBtn');
         const logoToggle = document.getElementById('logoToggle');
+        const logoIcon = document.getElementById('logo-icon');
         const mainContent = document.getElementById('mainContent');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const avatarInitials =document.getElementById('avatarInitials');
@@ -39,10 +40,8 @@
              data = result.data;
 
         
-        }else{
-            alert('not loaded but fetch working');
         }
-        
+        return ;
 
         }
         async function loadTotalPurchase(){
@@ -80,12 +79,15 @@
 
             dateNaissance.value = data.birthdate.trim();
             genre.value = data.gender=='male' ?'homme' : (data.gender == 'female' ? 'femme' : 'autre');
-            console.table(data);
+            // console.table(data);
         }
 
         function toggleSidebar() {
+        
             sidebar.classList.toggle('collapsed');
             mainContent.classList.toggle('expanded');
+            logoIcon.classList.toggle('undisplay');
+        
 
 
         }

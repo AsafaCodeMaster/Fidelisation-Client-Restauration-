@@ -49,10 +49,10 @@ async function sendForgotPasswordLinkMail(req , res) {
     
         // 3️⃣ Send the email
         const info = await transporter.sendMail(mailOptions);
-        console.log('✅ Email sent:', info.response);
+        // console.log('✅ Email sent:', info.response);
           res.status(200).send();
       } catch (error) {
-        console.error('❌ Error sending email:', error.message);
+        // console.error('❌ Error sending email:', error.message);
       }
 }
 

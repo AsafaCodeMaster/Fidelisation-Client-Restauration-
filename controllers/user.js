@@ -10,7 +10,7 @@ async function loadCurrentPoints(req , res) {
   points: user[0].reward_points
 });
   } catch (error) {
-    console.log('cannot loas user points due to ' + error);
+/*     console.log('cannot loas user points due to ' + error); */
     res.json({success : false});
   }
  
@@ -19,14 +19,14 @@ async function totalPurchase(req , res) {
   try {
     const query = `SELECT * FROM orders WHERE type = 'purchase' AND id_client = ?`;
     const [found] = await db.execute(query , [req.userId]);
-console.log(found.length);
+/* console.log(found.length); */
     res.json({
       success: true , 
       totalpurchase : found.length
     })
 
   } catch (error) {
-    console.log('error sending total client puchase due to ' + error);
+/*     console.log('error sending total client puchase due to ' + error); */
     res.json({
       success : false
     })
@@ -64,13 +64,13 @@ async function loadUser(req , res) {
       lastPasswordChanged : timeAgo(changed , today)
 
     };
-console.table(data);
+/* console.table(data); */
     res.json({
       success : true,
       data : data
     });
   } catch (e) {
-    console.log('user could not be load bc of ' +e);
+/*     console.log('user could not be load bc of ' +e); */
     res.json({success : false});
   }
 

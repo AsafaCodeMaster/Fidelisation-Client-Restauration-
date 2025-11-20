@@ -25,17 +25,17 @@ async function connectClient(req, res) {
 
     // Compare entered password with hashed one
     const validPassword = await bcrypt.compare(plainPassword, user.hashed_password);
-    console.log('comparing the passwords');
+    // console.log('comparing the passwords');
     if (!validPassword) {
-      console.log('invalid credential reached');
+      // console.log('invalid credential reached');
       return res.status(401).send('Invalid credentials');
 
     }
 
     // Create JWT token
-    console.log('valid credential reached token to be sent is :');
+    // console.log('valid credential reached token to be sent is :');
     const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
-    console.log(token);
+    // console.log(token);
 
     // Send token to client
     res.cookie('token', token, {
@@ -47,7 +47,7 @@ async function connectClient(req, res) {
 
 res.json({ message: 'Login successful' });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Error accessing your account');
   }
 }

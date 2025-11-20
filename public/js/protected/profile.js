@@ -170,7 +170,7 @@ profileForm.addEventListener('submit', async (e) => {
         }
         
     } catch (error) {
-        console.error('Error:', error);
+        // console.error('Error:', error);
         showAlert('danger', 'Erreur de connexion. Veuillez réessayer.');
     } finally {
         submitBtn.classList.remove('loading');
@@ -213,7 +213,7 @@ confirmDeleteInput.addEventListener('input', (e) => {
 
 // Confirm delete account
 confirmDeleteBtn.addEventListener('click', async () => {
-    alert('yes , it is clicked');
+    // alert('yes , it is clicked');
     const confirmText = confirmDeleteInput.value.trim();
     
     if (confirmText !== 'SUPPRIMER') {
@@ -262,7 +262,7 @@ confirmDeleteBtn.addEventListener('click', async () => {
         }
         
     } catch (error) {
-        console.error('Error:', error);
+        // console.error('Error:', error);
         showAlert('danger', 'Erreur de connexion. Veuillez réessayer.');
         confirmDeleteBtn.classList.remove('loading');
         confirmDeleteBtn.innerHTML = originalText;
@@ -394,12 +394,12 @@ function loadDraftFromLocalStorage() {
                     // Activate edit mode
                     editToggle.click();
                 }else{
-                    alert('yes continue');
+                    // alert('yes continue');
                     localStorage.removeItem('profile_draft');
                 }
             }
         } catch (e) {
-            console.error('Error loading draft:', e);
+            // console.error('Error loading draft:', e);
         }
     }
 }
@@ -537,8 +537,8 @@ if (prenomInput) {
     );
 }
 
-console.log('✅ Profile page initialized');
-console.log('Raccourcis clavier :');
-console.log('  - Ctrl/Cmd + E : Activer/désactiver le mode édition');
-console.log('  - Ctrl/Cmd + S : Sauvegarder (en mode édition)');
-console.log('  - Escape : Annuler les modifications ou fermer le modal');
+// console.log('✅ Profile page initialized');
+// console.log('Raccourcis clavier :');
+// console.log('  - Ctrl/Cmd + E : Activer/désactiver le mode édition');
+// console.log('  - Ctrl/Cmd + S : Sauvegarder (en mode édition)');
+// console.log('  - Escape : Annuler les modifications ou fermer le modal');

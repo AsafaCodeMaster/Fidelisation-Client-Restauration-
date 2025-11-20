@@ -78,6 +78,9 @@
             flex-shrink: 0;
             transition: var(--transition);
         }
+        .logo-icon.undisplay {
+            display : none;
+        }
 
         .logo-text {
             font-size: 1.25rem;

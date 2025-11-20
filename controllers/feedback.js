@@ -19,7 +19,7 @@ async function getClientFeedback(req, res) {
     res.render("feedback", { myclient });
 
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Error retrieving client info');
   }
 }
@@ -68,7 +68,7 @@ async function submit(req , res) {
     res.json({ success: true, message: 'Feedback submitted successfully' });
 
   } catch (error) {
-    console.error('Error submitting feedback:', error);
+    // console.error('Error submitting feedback:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 }

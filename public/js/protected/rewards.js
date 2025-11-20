@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadUserPoints();
     loadAvailableRewards();
     loadRewardsHistory();
-    console.log('✅ Rewards page initialized');
+    // console.log('✅ Rewards page initialized');
 });
 
 // Load user points
@@ -34,7 +34,7 @@ async function loadUserPoints() {
             userPointsEl.textContent = userPoints;
         }
     } catch (error) {
-        console.error('Error loading points:', error);
+        // console.error('Error loading points:', error);
     }
 }
 
@@ -49,7 +49,7 @@ async function loadAvailableRewards() {
             renderAvailableRewards();
         }
     } catch (error) {
-        console.error('Error loading rewards:', error);
+        // console.error('Error loading rewards:', error);
     }
 }
 
@@ -100,7 +100,7 @@ async function loadRewardsHistory() {
             renderRewardsHistory();
         }
     } catch (error) {
-        console.error('Error loading history:', error);
+        // console.error('Error loading history:', error);
     }
 }
 
@@ -208,7 +208,7 @@ if (confirmClaimBtn) {
             const result = await response.json();
 
             if (result.success) {
-                alert('✅ Récompense récupérée avec succès !');
+                // alert('✅ Récompense récupérée avec succès !');
                 closeClaimModal();
                 
                 // Reload data
@@ -216,11 +216,11 @@ if (confirmClaimBtn) {
                 loadAvailableRewards();
                 loadRewardsHistory();
             } else {
-                alert('❌ Erreur : ' + result.message);
+                // alert('❌ Erreur : ' + result.message);
             }
         } catch (error) {
-            console.error('Claim error:', error);
-            alert('❌ Erreur de connexion');
+            // console.error('Claim error:', error);
+            // alert('❌ Erreur de connexion');
         } finally {
             confirmClaimBtn.disabled = false;
             confirmClaimBtn.innerHTML = originalText;
@@ -245,4 +245,4 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-console.log('✅ Rewards page loaded');
+// console.log('✅ Rewards page loaded');

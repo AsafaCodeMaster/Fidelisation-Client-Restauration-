@@ -19,7 +19,7 @@ async function loadInfo(){
      if(response.success){
 
         loadedInfo = response.data;
-        console.log(loadedInfo);        
+        // console.log(loadedInfo);        
         return ;
      }
 }
