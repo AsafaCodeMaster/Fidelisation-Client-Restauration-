@@ -55,8 +55,8 @@ async function claim(req , res){
 
 async function storeInOrders(rewardId , rewardInfo , userId , remainingPoints){
 /*         // console.log("reward id is : " + rewardId); */
-  const query =`INSERT INTO orders (id_client ,id_reward, point , remaining_points , description , type) VALUES (?,?,?,?,?,?)`;
-  await db.execute(query , [userId ,rewardId, rewardInfo.points_required , remainingPoints , rewardInfo.name , 'reward']);
+  const query =`INSERT INTO orders (id_client ,id_reward, total_price , point , remaining_points , description , type) VALUES (?,?,?,?,?,?,?)`;
+  await db.execute(query , [userId ,rewardId, 0 ,rewardInfo.points_required , remainingPoints , rewardInfo.name , 'reward']);
   return ;
 }
 
