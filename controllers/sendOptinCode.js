@@ -50,10 +50,11 @@ async function sendCodeEmail(req) {
 
     // 3️⃣ Send the email
     const info = await transporter.sendMail(mailOptions);
-/*     console.log('✅ Email sent:', info.response); */
+     console.log('✅ Email sent:', info.response);
     return true;
   } catch (error) {
-/*     console.error('❌ Error sending email:', error.message); */
+    console.error('mail user: ', process.env.MAIL_USER , 'mail pass: ', process.env.MAIL_PASS);
+     console.error('❌ Error sending email:', error.message);
     return false;
   }
 }

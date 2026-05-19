@@ -32,9 +32,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(cookieParser());
 
 const allowedOrigins = [
+    `http://localhost:5000`,
     `http://localhost:${PORT}`,
-    `http://127.0.0.1:${PORT}`,
-    `http://192.168.1.114:${PORT}`
+    `http://127.0.0.1:${PORT}`
     // Ajoutez ici l'adresse IP locale si vous testez depuis un autre appareil (ex: http://192.168.x.x:3000)
 ];
 

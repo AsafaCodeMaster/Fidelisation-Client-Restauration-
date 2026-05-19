@@ -1,0 +1,40 @@
+version: '3.8'
+
+networks:
+
+  # Réseau exposé pour que tu puisses tester l'application depuis ton navigateur
+  web-tier:
+
+services:
+  # --- CHASSIS DE LA BASE DE DONNÉES ---
+  db:
+    image: mysql:8.0
+    container_name: gastronomie-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: GastroFidelity
+      MYSQL_ROOT_PASSWORD: dev0ps
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./config/sql:/docker-entrypoint-initdb.d
+    networks:
+      - web-tier # Totalement isolé de l'extérieur
+
+  # --- L'APPLICATION (Node.js/Express/EJS) ---
+  app:
+    build: . # Construit le Dockerfile situé à la racine actuelle
+    container_name: gastronomie-app
+    restart: always
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: dev0ps
+      DB_NAME: GastroFidelity
+      PORT: 3000
+    ports:
+      - "5000:3000" # Rends l'application accessible sur http://localhost:5000
+    networks: # Permet à l'application de parler à la DB
+      - web-tier        # Permet à ta machine hôte d'accéder à l'interface EJS
+
+volumes:
+  db_data:
