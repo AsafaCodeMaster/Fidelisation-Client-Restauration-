@@ -19,7 +19,7 @@ jobs:
     - name: Run Trivy Vulnerability Scanner
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 'fidelisation-client-restoration--app:latest'
+        image-ref: 'fidelisation-client-restauration--app:latest'
         format: 'table'
         severity: 'HIGH,CRITICAL'
         exit-code: '0' # On le laisse à 0 pour l'instant pour ne pas bloquer le pipeline pendant qu'on apprend
