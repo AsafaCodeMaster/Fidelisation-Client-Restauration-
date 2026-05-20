@@ -8,22 +8,23 @@ on:
 
 jobs:
   audit-and-build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     # 1. Récupérer le code source sur le runner de GitHub
     - name: Checkout Source Code
       uses: actions/checkout@v4
 
-    # 2. Construire l'image Docker de l'application
-    - name: Build Docker Image
-      run: docker build -t gastronomie-app:test .
-
-    # 3. Automatiser le scan Trivy sur le serveur GitHub !
+    # 2. Automatiser le scan Trivy sur le serveur GitHub !
     - name: Run Trivy Vulnerability Scanner
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: 'gastronomie-app:test'
+        image-ref: 'fidelisation-client-restoration--app:latest'
         format: 'table'
         severity: 'HIGH,CRITICAL'
         exit-code: '0' # On le laisse à 0 pour l'instant pour ne pas bloquer le pipeline pendant qu'on apprend
+
+    - name: Deploy Monolith Update Locally
+      run: |
+        docker compose down
+        docker compose up --build -d
